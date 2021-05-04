@@ -1,0 +1,36 @@
+#include "utilities.hpp" 
+
+
+
+String toPostFix(const String& eLine) {
+ 
+std::vector<String> token = eLine.split(' ');
+  
+	stack<String> result;
+
+  	int size = token.size() - 1;
+	int i = 0;
+
+     while ((i < size) && (token[i] != ';')) {
+
+         	String mainToken = token[i];
+
+     if(mainToken == ")") {
+		String right = result.pop();
+    		String oper = result.pop();
+    		String left = result.pop();
+    		result.push(left + " " + right + " " + oper);
+   	 }
+
+  	else {
+		if(mainToken != "(")
+    			result.push(mainToken);
+      }
+
+    i++;
+  }
+  return result.pop();
+}
+
+
+

@@ -1,0 +1,5 @@
+I think the bubble sort function is the problem with the runtime. Bubble sort
+must access the vector and the large number of calls in the function will 
+cause the runtime to be longer. I think that is the main reason at least. 
+I am not sure on how it is fixable but I think the main reason of the lab was
+to indicate the reason for the runtime statistics.

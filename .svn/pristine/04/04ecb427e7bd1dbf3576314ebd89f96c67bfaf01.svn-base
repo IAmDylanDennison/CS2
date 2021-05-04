@@ -1,0 +1,13 @@
+Project 1
+
+Part 1: 95
+	- << operator does not properly print bigints with value 0
+
+Part 2: 100
+	-good job
+
+Part 3: 100
+	-good job
+	-be careful with tests cases, you had an incorrect assert at the end of your times digit tests
+
+Bonus: 10

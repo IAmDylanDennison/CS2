@@ -1,0 +1,2128 @@
+// notes for cs23001
+
+//dylan dennison
+
+
+//week 4
+02/03/20
+//string adt
+
+#ifndef _STRING_HPP_
+#define _STRING_HPP_
+#include <iostream>
+const int CAPACITY = 10000
+
+class String 
+{
+private:
+char str[CAPACITY];
+public:
+String();
+String(char c);
+String(char [] c_arr);
+
+int capacity() const {return CAPACITY -1;}
+int length() const;
+
+String substr(int start; in end);
+int findchar(int, char);
+
+char operator[](int index) const;
+char& operator[] (int index);
+
+String &noperator+=(String str2);
+String & operator+(String str2);
+
+bool operator==(String str2);
+bool operator!=(String str2);
+
+bool operator<(String str2);
+bool operator<=(String str2);
+
+bool operator>(String str2);
+bool operator>=(String str2);
+};
+
+std::istream & operator >> (std::istream in, String &s);
+std::ostream & operator << (std::ostream out, String s);
+
+String & operator+(char c, String s);
+String & operator+(char []c, String& s);
+
+bool operator== (char c, String s);
+bool operator== (char []c, String s);
+bool operator!= (char []c, String s);
+
+bool operator< (char []c, String s);
+bool operator<= (char[]c, String& s);
+bool operator> (char []c, String s);
+bool operator>= (char[]c, String& s);
+
+
+#endif
+
+
+// .cpp file
+
+//include "String.hpp"
+//include <iostream>
+//include <cassert>
+
+String::String() 
+{
+str[0] = '\0';
+}
+
+String::String(char c)
+{
+str[0] = c;
+str[1] = '\0';
+}
+
+String::String(char[] c_arr)
+{
+int i = 0;
+	while(c_arr[i] != '\0';
+	{
+		str[i] = c_arr[i];
+		i++;
+	}
+	str[i] = '\0';
+}
+
+int String::length() const 
+{
+int count = 0;
+
+	while(str[count] != '\0'
+	{
+ 	count++;
+	}
+return count;
+}
+
+String::String substr(int start, int end) 
+{
+	//assert(start >= 0 && start < CAPACITY);
+	//assert(end >= 0 && end < CAPACITY && start <= end);	
+	if(start < 0)
+		start =0;
+	if(start > length());
+		start = length -1;
+	if(end < 0)
+		end = 0;
+	if(end > length())
+		end = length() -1;
+	if(start > end)
+	 String rlt;
+
+	int os = 0;
+	for(int i = 0; i <= end; i++)
+	{
+		rlt.str[os] = str[i];
+		os++;
+	}
+	
+	rlt.str[os] = '\0';
+	return rlt;
+
+}
+
+int String::findchar(int start, char c)
+{
+	assert(start >= 0 && start < length())
+
+	int end = length()-1;
+
+	int os = -1;
+	
+	for(int i = start; i <= end; i++)
+	{
+		
+		if(str[i] == c)
+		{
+		os = i;
+		}
+	}
+	return os;
+}
+
+//getter
+char String::operator[](int index) const
+{
+assert(index >= 0 && index < length());
+return str[index]
+}
+
+//setter not a const
+char String::operator[](int index) 
+{
+assert(index >= 0 && index < length());
+return str[index];
+}
+// need to record of length of string 1 for they can be added
+String& String::operator+=(String str2)
+{
+int len1 = length(); //this is the length of string 1
+int len2 = str2.length();
+int size = len1 + len2;
+int j = 0; // offset
+int i = 0;
+	//if(size > CAPACITY - 1)
+	for(i = len1; i < size; i++)
+	{
+		if( i > CAPACITY -2) // we need to keep the last postion at "\0"
+			break;
+		str[i] = str2.str[j];
+		j++;
+	}
+	str[i] = '\0';
+
+	return *this;
+{
+
+
+// need to record of length of string 1 for they can be added
+String& String::operator+=(String str2)
+{
+int len1 = length(); //this is the length of string 1
+int len2 = str2.length();
+int size = len1 + len2;
+int j = 0; // offset
+int i = 0;
+	//if(size > CAPACITY - 1)
+	for(i = len1; i < size; i++)
+	{
+		if( i > CAPACITY -2) // we need to keep the last postion at "\0"
+			break;
+		str[i] = str2.str[j];
+		j++;
+	}
+	str[i] = '\0';
+	
+	return str2;
+}
+
+bool String::operator==(String s2) const
+{
+	int size1 = length();
+	int size2 = s2.length();
+
+	if(size1 != size2)
+	return false;
+
+	for(int i = 0; i < size1; i++)
+	{
+		if(str[i] != s2.str[i]
+		return false;
+	}
+	return true;
+}
+
+bool String::operator!= (String str2) const 
+{
+	return !(*this == str2);
+}
+
+// prefix checking
+bool String::operator< (String str2) const
+{
+	int size1 = length();
+	int size2 = s2.length();
+
+	if(size1 > size2)
+		return false;
+	
+	for(int i = 0; i > size1; i++)
+	{
+		//if(str[i] != str2.str[i]; prefix checking
+		if(str[i] > str2.str[i]
+			return false;  //string comparison
+	}
+
+	return true;
+}
+
+//needs to be a friend func
+std::istream& operator >> (std::istream& in, String &s)
+{
+	char buf[CAPACITY];
+
+	if(in.eof())
+		in >> buf;
+	else
+	buf[0] = '\0';
+	
+	s =(buf) // not complete
+}
+//needs to be a friend func
+std::ostream& operator << (std::ostream& out, String s)
+{
+int len = s.length();
+
+	for(int i = 0; i < len; i++)
+	{
+	out << s.str[i];
+	}
+	out << std::endl;
+
+	return out;
+}
+
+
+// DYNAMIC MEMORY
+
+//header file
+
+
+#ifndef __ARRAY_HPP_
+#define __ARRAY_HPP_
+
+class Array {
+private:
+int* ptr;
+int len;
+int cap;
+
+public:
+array();
+Array(int cap);
+Array(const Array& arr2);
+
+~Array();
+
+int capacity() const {return cap:}
+int length() const {return len;}
+
+Array & operator= (Array & arr2);
+
+int operator[] (int index) const;
+int& operator[] (int index);
+
+void insert(int element);
+
+void resize(int new_cap);
+
+void swap(Array& sw)
+
+};
+
+
+
+
+// cpp file
+
+
+#include "Array.h"
+#include <iostream>
+#include <cassert>
+
+const int arr_size = 100;
+Array::Array() {
+prt= NULL
+len = 0;
+cap = 0;
+//ptr = new int[arr_size];
+//cap = arr_size;
+}
+
+Array::Array(int cap) {
+	assert(cap > 0);
+
+	ptr = new int[cap];
+
+	this->cap = cap;
+	len = 0;
+}
+
+Array::Array(const Array& arr2) {
+	len = arr2.len;
+	cap = arr2.cap;
+
+	ptr = new int[cap];
+
+	for(int i = 0; i < len; ++i) {
+		*(ptr+i) = arr2[i];
+}
+}
+
+Array::~Array() {
+if (ptr != NULL)
+	delete[] ptr;
+
+}
+
+int Array::operator[] (int index) const {
+assert(index >= 0 && index < length());
+return ptr[index];
+}
+
+int& Array::operator[] (int index) {
+assert(index >= 0 && index < length());
+return ptr[index];
+}
+
+Array& Array::operator=(Array& arr2) {
+	
+	if(cap > arr2.length)
+	{	
+		resize(arr2.length);
+	{
+
+	for(int i = 0; i < arr2.len; ++i){
+		ptr[i] = arr2.prt[i];
+}
+return arr2;
+}
+
+void Array::(insert(int elem)
+{
+	if(len < cap)
+	{
+	resize(cap + 1);
+	{
+
+	prt[len] = elem;
+	len++;
+}
+
+void resize(int new_cap)
+{
+ 	if (cap >= new_cap)
+		return;
+
+	int * new_ptr = new int [new_cap];
+
+	for(int i = 0; i < len; i++)
+	{
+		new_ptr[i] = ptr[i];
+	{
+
+	delete []ptr;
+	ptr= new_ptr;
+	
+	cap = new_cap;
+}
+
+void Array::swap(Array& arr2) {
+	//swap pointers
+	int* temp_ptr = ptr;
+	ptr = arr2.ptr;
+	arr2.ptr = tmp_ptr;
+
+	int tmp;
+	//swap cap and len
+
+	tmp = cap;
+	cap = arr2.cap;
+	arr2.cap = tmp;
+	
+	tmp = len;
+	len = arr2.len;
+	arr2.len = tmpl;
+
+
+}
+
+
+// DYNAMIC MEMORY using a TEMPLATE
+
+//header file
+
+
+#ifndef __ARRAY_TEMPLATE_HPP_
+#define __ARRAY_TEMPLATE_HPP_
+
+
+template <typename T>
+
+class Array {
+private:
+int* ptr;
+int len;
+int cap;
+
+public:
+array();
+Array(int cap);
+Array(const Array& arr2);
+
+~Array();
+
+int capacity() const {return cap:}
+int length() const {return len;}
+
+Array & operator= (Array & arr2);
+
+int operator[] (int index) const;
+int& operator[] (int index);
+
+void insert(T element);
+
+void resize(int new_cap);
+
+void swap(Array& arr2)
+
+};
+
+// Array<char> arr1;
+#endif
+
+
+// cpp file
+
+
+#include "Array.h"
+#include <iostream>
+#include <cassert>
+
+const int arr_size = 100;
+
+template <typename T>
+Array::Array() {
+prt= NULL
+len = 0;
+cap = 0;
+//ptr = new T[arr_size];
+//cap = arr_size;
+}
+
+template <typename T>
+Array::Array(int cap) {
+	assert(cap > 0);
+
+	ptr = new T[cap];
+
+	this->cap = cap;
+	len = 0;
+}
+
+template <typename T>
+Array::Array(const Array& arr2) {
+	len = arr2.len;
+	cap = arr2.cap;
+
+	ptr = new T[cap];
+
+	for(int i = 0; i < len; ++i) {
+		*(ptr+i) = arr2[i];
+}
+}
+template <typename T>
+Array::~Array() {
+if (ptr != NULL)
+	delete[] ptr;
+
+}
+
+template <typename T>
+int Array::operator[] (int index) const {
+assert(index >= 0 && index < length());
+return ptr[index];
+}
+
+template <typename T>
+int& Array::operator[] (int index) {
+assert(index >= 0 && index < length());
+return ptr[index];
+}
+
+template <typename T>
+Array& Array::operator=(Array& arr2) {
+	
+	if(cap > arr2.length)
+	{	
+		resize(arr2.length);
+	{
+
+	for(int i = 0; i < arr2.len; ++i){
+		ptr[i] = arr2.prt[i];
+}
+return arr2;
+}
+
+template <typename T>
+void Array::(insert(T elem)
+{
+	if(len < cap)
+	{
+	resize(cap + 1);
+	{
+
+	prt[len] = elem;
+	len++;
+}
+
+template <typename T>
+void resize(int new_cap)
+{
+ 	if (cap >= new_cap)
+		return;
+
+	int * new_ptr = new T [new_cap];
+
+	for(int i = 0; i < len; i++)
+	{
+		new_ptr[i] = ptr[i];
+	{
+
+	delete []ptr;
+	ptr= new_ptr;
+	
+	cap = new_cap;
+}
+
+template <typename T>
+void Array::swap(Array& arr2) {
+	//swap pointers
+	T* temp_ptr = ptr;
+	ptr = arr2.ptr;
+	arr2.ptr = tmp_ptr;
+
+	int tmp;
+	//swap cap and len
+
+	tmp = cap;
+	cap = arr2.cap;
+	arr2.cap = tmp;
+	
+	tmp = len;
+	len = arr2.len;
+	arr2.len = tmpl;
+
+
+}
+
+
+
+#ifndef __STACK_HPP_
+#define __STACK_HPP_
+
+const int SIZE = 1000;
+
+class Stack
+{
+
+private:
+	T s[SIZE];
+	int os;
+
+public:
+	
+	Stack();	 //empty stack
+	{
+		os = -1; //if its pointing to -1 means it empty
+	}
+
+	void push(T elem);
+	{
+		//if(os == SIZE -1)
+			//return;
+
+		if(isFull())
+			return;
+		
+		s[os + 1] = elem;
+			os++;
+
+	}
+	
+	T pop();
+	{
+		//if(isEmpty())
+			//return NULL;
+			//or
+		assert(!isEmpty());
+		
+		os--;
+		
+		return s[os + 1];
+	}
+
+	T top();
+	{
+	assert(!isEmpty());
+
+	return s[os];
+
+	}
+	
+
+ 	bool isEmpty();
+	{
+		return (os == -1);
+	}
+	
+	bool isFull();
+	{
+		return (os == SIZE -1);
+	}
+	
+
+};
+
+
+#endif
+
+
+
+
+
+
+#include "stack.h"
+#include "String.h"
+
+
+int charToIntexpr(char c)
+{
+	return(c) - '0';
+}
+
+int eval_infix(int lhs, char op, int rhs)
+{
+	switch(op)
+	{
+		case '+': return lhs + rhs;
+		case '-': return lhs - rhs;
+		case '*': return lhs * rhs;
+		case '/': return lhs / rhs;
+	}
+	
+	return -1;
+}
+
+bool isOperand(char c)
+{
+ return ( c >= '0' && c <= '9');
+}
+
+int eval_postfix(const char expr[])
+{
+	Stack <int> sta;
+
+	int i = 0;
+
+	int left, right;
+
+	while(expr[i] = '\0')
+	{
+		if(!isOperand(expr[i]))
+		{
+			right = sta.pop();
+			left = sta.pop();
+			sta.push(eval_infix(left, expr[i], right));
+		}	
+		
+		else 
+			sta.push(charToIntexpr[i]);
+	
+		++i;
+			
+	}
+return sta.pop();
+	
+}
+
+
+
+
+String infix_to_postfix(const char expr[])
+{
+	Stack<String> sta;
+	int i = 0;
+	String token. left, right, op;
+
+	while(expr[i] != '\0')
+	{
+		token = expr[i];
+		
+		if(token == ")")
+		{
+			right = sta.pop();
+			op = sta.pop();
+			left = sta.pop();
+			sta.push(left + right + op);
+		}
+		
+		else
+			if(token != "(")
+			{
+			sta.push(expr[i]);
+			}
+		i++;
+	}
+	
+	return sta.pop();
+
+}
+
+
+
+//tower of hanoi factorial example
+
+// .hpp file
+#include <iostream>
+#include <fstream>
+
+
+enum poleName{left, right, aux}
+
+class pole
+{
+private: 
+	poleName p;
+public:
+	pole(poleName x) { p = x;}
+	
+	friend std::ostream& operator<<(std::ostream& out, pole pol)
+	{
+		switch (pol.p)
+		{
+		case left: std::cout << "Left"; break;
+		case right: std::cout << "Right"; break;
+		case aux: std::cout << "Middle";
+		}
+		return out;
+	}
+
+};
+
+
+void move(int n, pole left, pole middle, pole right)
+{
+
+	//base case
+	if(n < 1)
+		return;
+	else //recursive step
+		move (n-1, left, right, middle);
+		std::cout << "moving from " << left << "to " << right << std::endl;
+		move (n-1, middle, left, right);
+ 
+
+}
+
+
+// main func (int main)
+
+
+int main() {
+
+	pole lp(left), rp(right, mp(aux);
+ 	int n;
+	std::cin >> n;
+
+	move(n, lp, rp, mp);
+	
+
+
+}
+
+
+
+//headerfile 
+
+
+#ifndef _QUEUE_HPP_
+#define _QUEUE_HPP_
+
+const int SIZE = 1000;
+
+template <typename T>
+
+class Queue
+{
+private:
+	T q[SIZE]
+	int * front, rear;
+	bool empty;
+public:
+	Queue() { front = rear = 0; empty = true;}
+
+	void enqueue(const T& elem);
+	T dequeue();
+
+	bool isEmpty() {return empty;}
+	bool isFull(); {return (!empty) && (front == rear); }
+
+};
+
+// cpp file
+
+#include <iostream>
+#include <cassert>
+
+template <typename T>
+
+void Queue<T>::enqueue(const T& elem)
+{
+	if(isFull())
+		return;
+
+	q[rear] = elem;
+
+	rear = (rear + 1)%SIZE; //if 10001 it will be at element 1 circular queue
+
+	empty = false;
+}
+
+
+void Queue<T>::dequeue()
+{
+	assert(!isEmpty());
+
+	T rlt;
+	rlt = q[front];
+	front =(front + 1)%SIZE;
+
+	if(front == rear)
+		empty = true;
+
+	return rlt;
+	
+}
+
+
+
+// main file
+
+#include "queue.h"
+#include <iostream>
+
+
+int main(){
+
+	Queue<int> q1;
+
+	q1.enqueue(1);
+	q1.enqueue(2);
+	q1.enqueue(3);
+	q1.enqueue(4);
+	q1.enqueue(5);
+
+	int x = q1.enqueue();
+	std::cout << x << std::endl;
+
+	q1.enqueue(4);
+
+	std::cout << q1.enqueue(); << endl;
+	
+
+}
+
+
+
+//header file 
+// linked list
+
+
+#ifndef _STACK_LIST_
+#define _STACK_LIST_
+
+template <typename T>
+
+class node 
+{
+public:
+	T data;
+	node<T>* next;
+	node() {next = NULL;}
+	
+	node(const T& elem) { data = elem; next = NULL; }
+
+};
+
+template <typename T>
+class Stack
+{
+private:
+	node<T> * head;
+	
+public:
+
+	Stack() { head = NULL; }
+
+	void push (const T& elem);
+
+	T pop();
+	
+	~Stack();
+	{
+		node<T>* tmp;
+		while(head != NULL)
+		{
+			tmp = head;
+			head = head->next;
+			delete tmp;
+		}
+	}
+}
+
+//insertion of new node into the stack
+void Stack<T>::push (const T& elem) {
+	
+	assert(!isFull());
+	
+	node<T>* new_node = new node<T>(elem);
+	new_node->next = head;
+	head = new_node;
+}
+
+//desertion of node in the stack
+T Stack<T>::pop()
+{
+	assert(!isEmpty());
+	node<T>* temp = head;
+	head = head->next;
+	
+
+	T rlt = temp->data;
+	delete temp;
+
+	return rlt;
+}
+
+
+bool Stack<T>::isFull() {
+ node<T>* temp = new node<T>;
+
+	if(temp == NULL) 
+		return true;
+	else
+	{
+		delete temp;
+		return false;
+
+	}
+}
+
+
+#endif
+
+//hpp file
+
+#ifndef __QUEUE_LIST__
+#define __QUEUE_LIST__
+
+template <typename T>
+
+class node
+{
+public:
+	T data;
+	node<T>* next;
+	
+	node() {next = NULL:}
+	node(const T elem) {data = elem; next = NULL; }
+
+};
+
+template <typenamed T>
+
+class Queue
+{
+private:
+	node<T>* front, * rear;
+public:
+
+	Queue() {front = rear = NULL;}
+	~Queue()
+	{
+		while(front != NULL) {
+		Node<T> * tempptr = front;
+		front = front->next;
+		delete tempPtr;	
+
+		}
+	
+	}
+	void enqueue(const T elem);
+	T dequeue();
+
+	bool isEmpty() { return front == NULL;}
+
+	bool isFull();
+	{
+		node<T>* tempNode = new node<T>;
+			if(tempNode == NULL)
+				return true;
+
+			else
+			{
+				delete tempNode;
+				return false;
+			}
+	}
+
+};
+
+template <typename T>
+void Queue<T>::enqueue(const T elem) {
+	assert(!isEmpty));
+
+	node<T>* newNode = new node<T>(elem);
+	if(front == NULL)
+	{
+		front = rear = newNode;
+		return;
+	}
+	rear->next = newNode;
+	rear = newNode;
+	
+}
+
+template <typename T>
+T Queue<T>::dequeue()
+{
+	assert(!isEmpty());
+
+	node<T>* tmp = front;
+	front = front->next;
+
+	if(front == NULL)
+		rear = NULL;				
+
+	T rlt = temp->date;
+	
+	delete tmp;
+	return rlt;
+}	
+
+
+
+
+
+
+
+
+
+//DOUBLE LINKED list
+// header file
+#ifndef ___DOUBLE_LINKED_LIST__
+#define ___DOUBLE_LINKED_LIST__
+
+template <typename T>
+class dnode
+{
+public:
+	T data;
+	dnode<T>* prev, * next;
+
+	dnode() { prev = next = NULL; }
+	dnode(const T elem) { data = elem; prev = next = NULL; }
+};
+
+template <typename T>
+class Itr
+{
+private:
+	dnode<T>* current;
+
+public:
+	Itr() { current = NULL; }
+	Itr(dnode<T>* ptr) { current = ptr; }
+
+	Itr<T>& operator++(); //pre-increment ++i
+	Itr<T> operator++(int); //post-increment i++
+	Itr<T>& operator--(); //pre-decrement --i
+	Itr<T> operator--(int); //post-decrement i--
+	T       operator*() const { return current->data; };
+	T& operator*() { return current->data; };
+	const dnode<T>* operator->() const { return current; };
+	dnode<T>*& operator->() { return current; };
+	
+	bool operator==(Itr<T> itr2);
+	{	
+		if(ir2 == NULL)
+		{
+			if(current == NULL)
+				return true;
+			else
+				return false;
+		}
+			if(current == itr2.current)
+				return true;
+	}
+	
+
+	bool operator!=(Itr<T> itr2) {return !(*this == itr2); };
+
+};
+
+template <typename T>
+Itr<T>& Itr<T>::operator++() //pre-increment ++i
+{
+	if (current != NULL)
+		current = current->next;
+	//Itr<T> rlt(current);
+	//return rlt;
+	return *this;
+}
+
+template <typename T>
+Itr<T> Itr<T>::operator++(int) //post-increment i++
+{
+	Itr<T> rlt(current);
+	if (current != NULL)
+		current = current->next;
+	return rlt;
+}
+
+template <typename T>
+Itr<T>& Itr<T>::operator--() //pre-decrement --i
+{
+	if (current != NULL)
+		current = current->prev;
+	//Itr<T> rlt(current);
+	//return rlt;
+	return *this;
+}
+
+template <typename T>
+Itr<T> Itr<T>::operator--(int) //post-decrement i--
+{
+	Itr<T> rlt(current);
+	if (current != NULL)
+		current = current->prev;
+	return rlt;
+}
+
+
+template <typename T>
+class DList
+{
+private:
+	dnode<T>* front, * rear;
+	
+public:
+	DList() { front = rear = NULL;}
+	
+	~DList()
+	{
+		dnode<T>* temp;
+		
+		while(front != NULL)
+		{
+			temp = front;
+			front = front->next;
+			delete temp;
+		}
+			
+	}
+
+	bool isEmpty() const; {return (front == NULL); }
+
+	bool isFull() const; 
+	{
+		dnode<T>* temp = new dnode<T>;
+		if(temp != NULL)
+		{
+			delete temp;
+			return false;
+		}
+		else
+			return true;
+	}
+
+	const Itr<T> operator[](int) const;
+	Itr<T>& operator[](int);
+
+	const Itr<T> find(const T &elem) const;
+	Itr<T>& find(const T & elem);
+
+	const Itr<T> begin() const { return Itr(front); }
+	Itr<T>& begin() const { Itr<T>* i = new Itr<T>(front); return *i; }
+	
+	const Itr<T> end() const { return Itr(rear); }
+	Itr<T>& end() const { Itr<T>* i = new Itr<T>(rear); return *i; }
+
+	void insertBeforeNode(const T& elem, Iter<T> iterator);
+	void insertAfterNode(const T& elem, Iter<T> iterator);
+
+	void remove(Itr<T> iterator);
+
+};
+
+template <typename T>
+const Itr<T> DList<T>::operator[](int n) const
+{
+	assert(n >= 0);
+	
+	dnode<T>* tmp = front;
+
+	for(int i = 0; i < n; i++)
+	{
+		if(tmp == NULL)
+			break;
+
+		tmp = tmp->next;
+	}
+	return Itr<T>(tmp);
+}
+
+template <typename T>
+Itr<T>& DList<T>::operator[](int n) 
+{
+	assert(n >= 0);
+	
+	dnode<T>* tmp = front;
+
+	for(int i = 0; i < n; i++)
+	{
+		if(tmp == NULL)
+			break;
+
+		tmp = tmp->next;
+	}
+	Itr<T> iter = new Iter<T>(tmp);
+	return *iter;
+}
+
+template <typename T>
+const Itr<T> DList<T>::find(constT& elem)
+{
+	dnode<T>* tmp = front;
+	while (tmp != NULL && tmp->data != elem)
+		tmp = tmp->next;
+
+	return Itr<T>(tmp);
+}
+
+template <typename T>
+void DList::insertBeforeNode(const T& elem, Iter<T> iterator)
+{
+	dnode<T>* newNode = new dnode<T>(elem);
+	
+	//if list is empty
+	if(front == NULL)
+	{
+		front = rear = newNode;
+		return;
+	}
+	
+	// iterator is pointing to the front of the list
+	if(iterator.operator->() == front)
+	{
+		newNode->next= front;
+		front->prev = newNode;
+		front = newNode;
+		return;	
+	}
+
+	//general case
+	newNode->next = iterator.operator->();
+	iterator->prev = newNode;
+	iterator->prev->next = newNode;
+	newNode->prev = iterator->prev;
+	
+	
+}
+
+template <typename T>
+void DList::insertAfterNode(const T& elem, Iter<T> iterator)
+{
+	dnode<T>* newNode = new dnode<T>(elem);
+	
+	//if list is empty
+	if(front == NULL)
+	{
+		front = rear = newNode;
+		return;
+	}
+	
+	// iterator is pointing to the last node of the list
+	if(iterator.operator->() == rear)
+	{
+		newNode->prev= rear;
+		rear->next = newNode;
+		rear = newNode;
+		return;	
+	}
+
+	//general case
+	newNode->next = iterator->next;
+	newNode->prev = iterator.operator->();
+	iterator->next->prev = newNode;
+	iterator->next = newNode;
+	
+
+
+	
+}
+
+template <typename T>
+void DList<T>::remove(Itr<T> iterator)
+{
+	dnode<T>* tmp = iterator.operator->();
+	
+	tmp->prev->next = tmp->next;
+	tmp->next->prev = 
+}
+
+#endif
+
+
+
+//Binary Trees
+
+
+#define _BINARY_TREE_
+#ifndef _BINARY_TREE_
+
+#include <iostream>
+#include <cassert>
+
+template <typename T>
+
+class btree
+{
+private:
+	T data;
+	
+	bool empty;
+	
+	btree<T> * left, * right;
+
+public:
+
+	btree() { empty = true; left = right = NULL;};
+	btree(const T & elem); {data = elem; empty = false; left = right = NULL; };
+	~btree();
+	btree(const btree<T> & tree2);
+
+	void binsert(const T& elem);
+
+	bool find(T& elem);
+
+	void inorder(std::ostream & out);
+	void preorder(std::ostream & out);
+	void postoder(std::ostream & out);
+
+	void swap(btree<T> & tree2); 
+};
+
+
+template <typename T>
+void btree<T>::swap(btree<T> & tree2) {
+	T tmp_data = data;
+	data = tree2.data;
+	tree2.data = tmp_data;
+
+	//left subtree
+	btree<T>* tmp_ptr = left;
+	left = tree2.left;
+	tree2.left = tmp_ptr;
+
+	//left subtree
+	btree<T>* tmp_ptr = right;
+	right = tree2.right;
+	tree2.right = tmp_ptr;
+}
+
+void btree<T>::binsert(const T& elem) {
+	
+	if(empty == true) {
+		data = elem;
+		empty = false;
+		return;
+	}
+	
+	if(elem <= data) { //elem should be inserted into left subtree
+		
+		if(left == NULL)
+		{
+			left = new btree<T>(elem);	
+		}
+		else {
+			left->binsert(elem);
+		return;
+	
+		}
+	
+	}
+
+	 if(elem > data) { //elem should be inserted into right subtree
+
+		if(right == NULL)
+		{
+			right = new btree<T>(elem);	
+		}
+		else {
+			right->binsert(elem);
+		return;
+	
+		}
+	}
+
+}
+
+template <typename T>
+btree<T>::btree(const btree<T> & tree2) { //copy constructor
+
+	data = tree2.data;
+	empty = tree2.empty;
+	left = right = NULL;
+
+	if(tree2.left != NULL) {
+
+		//tree2 has a left subtree
+		left = new btree<T>(*(tree2.left)); //recurison calling
+
+	
+	}
+
+	if(tree2.right != NULL) {
+		
+		//tree2 has a right subtree
+		right = new btree<T>(*(tree2.right)); //recursion calling
+	}
+
+}
+
+template <typename T>
+btree<T>::~btree() {
+	
+	if(left != NULL) 
+		delete left; //recursion call
+	if(right != NULL)
+		delete right; // recursion call
+}
+
+template <typename T>
+bool btree<T>::find(T& key) {
+	
+	if(empty == true) { //extreme case
+		
+		return false;
+	}
+
+	if(key == data) {
+		
+		return true;
+	}
+	
+	if(key <= data) { // key might exist in the left subtree
+		
+		if(left == NULL)
+			return false;
+		else
+			return left->find(key); //recurison called
+	{
+	
+	if(key > data) { //key might exist in the right subtree
+		if(right == NULL)
+			return false
+		else
+			return right->find(key); //recurison called
+	}
+}
+
+template <typename T>
+void btree<T>::inorder(std::ostream& out) {
+
+	if(empty == tree) {
+		return;
+	}
+
+	if(left != NULL) {
+		
+		left->inorder(out);
+	}
+
+	out << data << " ";
+	
+	if(right != NULL) {
+
+		right->inorder(out);
+	}
+	
+	out << data << " ";
+}
+
+template <typename T>
+void btree<T>::preorder(std::ostream& out) { //not right did not see
+	
+	if(empty == tree) {
+		return;
+	}
+
+	out << data << " ";
+	
+	if(left != NULL) {
+		
+		left->preorder(out);
+	}
+
+	
+	if(right != NULL) {
+
+		right->preorder(out);
+	}
+	
+	
+}
+
+template <typename T>
+void btree<T>::postorder(std::ostream& out) {
+	if(empty == tree) {
+		return;
+	}
+
+	if(left != NULL) {
+		
+		left->postorder(out);
+	}
+	
+	if(right != NULL) {
+
+		right->postorder(out);
+	}
+	
+	out << data << " ";
+}
+
+
+#endif
+
+// main .cpp
+#include <iostream>
+
+int main() {
+
+btree<T> tree;
+
+tree.binsert(85);
+tree.binsert(22);
+tree.binsert(93);
+
+tree.binsert(9);
+tree.binsert(80);
+
+tree.inorder(std::cout);
+std::cout << std::endl;
+
+tree.preorder(std::cout);
+std::cout << std::endl;
+
+tree.postorder(std::cout);
+std::cout << std::endl;
+
+
+}
+
+
+/// binary search tree with node class
+
+
+#ifndef ___BINARY_TREE_WITH_NODE___
+#define ___BINARY_TREE_WITH_NODE___
+
+#include <iostream>
+
+template <typename T>
+class bnode
+{
+public:
+	T data;
+	bnode<T>* left, * right;
+
+	bnode() { left = right = NULL; }
+	bnode(const T& elem) { data = elem; left = right = NULL; }
+
+	bnode<T>* treeCopy();
+	void treeDeletion();
+	bool find(const T& key);
+
+	void inorder(std::ostream& out);
+
+	void binsert(const T& elem);
+	bnode<T>* bremove(const T& elem);
+
+	T predecessor();
+};
+
+
+template <typename T>
+class btree
+{
+private:
+	bnode<T>* root;
+public:
+	btree() { root = NULL; }
+	btree(btree<T>& tree2);	// copy constructor
+	~btree();
+
+	bool find(const T& key);
+	void inorder(std::ostream& out);
+
+	void binsert(const T& elem);
+	void bremove(const T& elem);
+
+};
+
+bnode<T>* bnode<T>::treeCopy()
+{
+	bnode<T>* node = new bnode<T>(data);
+	if (left != NULL)
+		node->left = left->treeCopy();
+	if (right != NULL)
+		node->right = right->treeCopy();
+	return node;
+}
+
+btree<T>::btree(btree<T>& tree2)
+{
+	if (tree2.root == NULL)
+	{
+		root = NULL;
+		return;
+	}
+
+	root->data = tree2.root->data;
+	if (tree2.root->left != NULL)
+		root->left = tree2.root->left->treeCopy();
+	else
+		root->left = NULL;
+	if (tree2.root->right != NULL)
+		root->right = tree2.root->right->treeCopy();
+	else
+		root->right = NULL;
+}
+
+bool btree<T>::find(const T& key)
+{
+	if (root == NULL)
+		return false;
+	return root->find(key);
+}
+
+bool bnode<T>::find(const T& key)
+{
+	if (data == key)
+		return true;
+	if (key <= data)	// left subtree
+	{
+		if (left != NULL)
+		{
+			return left->find(key);
+		}
+		else
+			return false;
+	}
+
+	if (key > data)	// right subtree
+	{
+		if (right != NULL)
+		{
+			return right->find(key);
+		}
+		else
+			return false;
+	}
+}
+
+void btree<T>::inorder(std::ostream& out)
+{
+	if (root == NULL)
+		return;
+	root->inorder(out);
+}
+
+void bnode<T>::inorder(std::ostream& out)
+{
+	if (left != NULL)
+		left->inorder(out);
+	out << data << " ";
+	if (right != NULL)
+		right->inorder(out);
+}
+
+
+void btree<T>::binsert(const T& elem)
+{
+	if (root == NULL)
+	{
+		root = new bnode<T>(elem);
+		return;
+	}
+
+	root->binsert(elem);
+}
+
+void bnode<T>::binsert(const T& elem)
+{
+	if (elem <= data)	// insert elem into left subtree
+	{
+		if (left != NULL)
+			left->binsert(elem);
+		else
+			left = new bnode<T>(elem);
+	}
+	else
+	{
+		// insert elem into right subtree
+		if (right != NULL)
+			right->binsert(elem);
+		else
+			right = new bnode<T>(elem);
+	}
+}
+
+void btree<T>::bremove(const T& elem)
+{
+	if (root == NULL)
+		return;
+	root = root->bremove(elem);
+}
+
+bnode<T>* bnode<T>::bremove(const T& elem)
+{
+	if (data == elem)
+	{
+		if (left == NULL & right == NULL)
+		{
+			// leaf node
+			delete this;
+			return NULL;
+		}
+		if (left == NULL)
+		{
+			// there is one right subtree
+			bnode<T>* rightsubtree = right;
+			delete this;
+			return rightsubtree;
+		}
+		if (right == NULL)
+		{
+			// there is one left subtree
+			bnode<T>* leftsubtree = left;
+			delete this;
+			return leftsubtree;
+		}
+
+		// the current node has two children
+		data = left->predecessor();
+		left->bremove(data);
+		return this;
+	}
+	else
+	{
+		if (elem <= data)
+		{
+			// delete elem from left subtree
+			if (left != NULL)
+			{
+				left = left->bremove(elem);
+				return this;
+			}
+			else
+				return this;
+		}
+		else
+		{
+			// delete elem from right subtree
+			if (right != NULL)
+			{
+				right = right->bremove(elem);
+				return this;
+			}
+			else
+				return this;
+		}
+	}
+}
+//gives the higher node
+T bnode<T>::predecessor()
+{
+	if (right != NULL)
+		return right->predecessor();
+	return data;
+}
+
+#endif
+
+
+//backtracking 	COLOR MAP
+
+#ifndef __MAP_COLORING__
+#define __MAP_COLORING__
+
+#include <iostream>
+
+const int max_MAP_SIZE = 10;
+
+//enumiated data type
+//goes by element 0, 1, 2, 3, 4.. 4 being none
+enum theColors {red, green, blue, yello, none};
+
+class color
+{
+private:
+	theColors hue;
+
+public:
+	color() { hue = NULL; }
+	color(theColors c) { hue = c; }
+
+	bool operator==(color c) { return hue == c.hue; }
+
+	color& operator++ {return color(((int)hue+1)); }
+	friend std::ostream& operator<<(std::ostream& out, color c);
+
+};
+
+class map {
+private:
+	
+	bool neighbor[max_MAP_SIZE][max_MAP_SIZE];
+	color coloring[max_MAP_SIZE];
+
+public:
+	int numOfCountries;
+	map();
+	bool isValidColoring(int country, color c);
+	void colorCounty(int country, color) { coloring[country] = c; }
+	
+	friend std::istream& operator>> (std::istream& in, map& m);
+	friend std::ostream& operator>> (std::ostream& out, map& m);
+};
+
+
+
+#endif
+
+//cpp file
+
+#include "color_map.h"
+
+//friend func
+std::ostream& operator<<(std::ostream& out, color c) {
+	switch(c.hue)
+	{
+		case red: out << "red"; break;
+		
+		case blue: out << "blue"; break;
+		
+		case green: out << "green"; break;
+
+		case yellow: out << "yellow"; break;
+		
+		case none: out << "none";
+	}
+	
+	return out;
+}
+
+map::map() {
+
+	for(int i = 0; i < max_MAP_SIZE; i++)
+	{
+		coloring[i] = none;
+		for(int j = 0; j < max_MAP_SIZE; j++)
+			neighbor[i][j] = false;
+	}
+
+}
+
+bool map::isValidColoring(int country, color c) {
+
+	for(int i = 0; i < numOfCountries; i++)
+	{
+		if(neighbor[country][i] == true && coloring[i] == c )
+			return false;
+		
+	}
+	return true;
+}
+	
+std::istream& operator>> (std::istream& in, map& m) {
+
+	in >> m.numOfCountries;
+
+	for (int i = 0; i < m.numOfCountries; i++) {
+
+		for (int j = 0; j < m.numOfCountries; j++) {
+			
+			int tmp;
+			
+			in >> tmp;
+			
+			if(tmp == 1)
+				m.neighbor[i][j] = true;
+			else
+				m.neignbor[i][j] = false;
+
+		}
+	}
+
+	return in;
+}
+
+// not complete 
+std::ostream& operator>> (std::ostream& out, map& m) {
+
+	for (int i = 0; i < m.numOfCountries; i++)
+		out << "Country "<<i<<": "<<m.coloring[i] << " ";
+	out << std::endl;
+	return out;
+}
+
+
+
+//cpp file
+
+#include "color_map.cpp"
+#include <ifstream>
+//not finished copy form email
+//country is the ID of a country we want to color
+// world is a map object
+bool MapColor(int country, map& world) {
+
+	if (country == world.numOfCountries)
+		return true;
+	bool doneColoring = false;
+	bool aColorRemaining = true;
+	color c(red); // color c= red;
+	while (aColorRemaining == true && doneColoring == false)
+	{
+		if (world.isValidColoring(country, c))
+		{
+			world.colorCountry(country, c);
+			doneColoring = MapColor(country+1, world);
+			if (doneColoring)
+				break;
+		}
+		if (c == color(yellow))
+			aColorRemaining = false;
+		else
+			++c;
+	}
+
+	if (doneColoring == false)	// backtracking
+	{
+		world.colorCountry(country, color(none));
+	}
+
+	return doneColoring;
+}
+//not finished
+int main() 
+{
+	map world;
+	std::ifstream in("map.txt")
+	int >> world;
+	MapColor(0, world);
+
+	std::cout << world;
+	std::cout << endl;
+
+	
+}
+
+
+//inheritance 
+
+// shap hpp shows how virutal functions work.
+
+#ifndef ___SHAPE__HPP__
+#define ___SHAPE__HPP__
+#include <iostream>
+
+// base class
+class shape
+{
+protected:
+	int x, y; 
+public:
+	shape():x(0), y(0) {  }//x = y = 0;
+	void move(int nx, int ny) { x = nx; y = ny; }
+	virtual void draw() { std::cout << "Shape: " << x << ", " << y << std::endl; }
+};
+
+class rectangle :public shape
+{
+protected:
+	int height, width;
+public:
+	rectangle(int h = 0, int w = 0):shape(), height(h), width(w) {}
+	void draw() 
+	{ 
+		std::cout << "Rectangle: (" << x << ", " << y << ") " << width << " " << height << std::endl; 
+	}
+};
+
+class square :public rectangle
+{
+public:
+	square(int w = 0) :rectangle(w, w) {}
+	void draw()
+	{
+		std::cout << "Square: (" << x << ", " << y << ") " << width << " " << height << std::endl;
+	}
+};
+
+class triangle :public shape
+{
+protected:
+	int base, altitude;
+public:
+	triangle(int b, int a) :shape(), base(b), altitude(a) {}
+	void draw()
+	{
+		std::cout << "Triangle: (" << x << ", " << y << ") " << base << " " << altitude << std::endl;
+	}
+
+};
+
+class circle:public shape
+{
+protected:
+	int radius;
+public:
+	circle(int r = 0) :shape(), radius(r) {}
+	void draw()
+	{
+		std::cout << "Circle: (" << x << ", " << y << ") " << radius << std::endl;
+	}
+};
+
+#endif
+
+//cpp
+
+#include "shape.h"
+
+int main()
+{
+	shape* s = new shape();
+	rectangle* rec = new rectangle(2, 3);
+
+	shape* s2;
+	
+	s2 = s;
+	s2->draw();
+
+	s2 = rec;
+	s2->draw();
+	
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

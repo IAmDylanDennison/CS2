@@ -1,0 +1,20 @@
+ 13:19:12 up 158 days, 20:41, 18 users,  load average: 0.16, 0.16, 0.17
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+whaverst pts/1    daphne.sdml.cs.k 10:59    1:09m  0.26s  0.26s -bash
+whaverst pts/2    daphne.sdml.cs.k 10:59    2:19m  0.22s  0.22s -bash
+pcremea1 pts/4    lab152.labs.cs.k 13:11   48.00s  0.19s  0.19s -bash
+mbabcoc5 pts/5    lab160.labs.cs.k 13:14    0.00s  0.16s  0.16s -bash
+msherlin pts/6    lab222.labs.cs.k 13:18    0.00s  0.10s  0.10s -bash
+mjorda23 pts/11   cpe-173-89-88-51 12:01    2:32   0.37s  0.26s vim MatthewJordan-CS43203-Warm-up-Draft.c
+ddenni19 pts/14   lab221.labs.cs.k 12:02    0.00s  0.44s  0.02s w
+aalbaghd pts/17   lab201.labs.cs.k 12:12    5:44   0.45s  0.45s -bash
+swellin4 pts/18   lab213.labs.cs.k 12:12    8.00s  0.54s  0.54s -bash
+nuphouse pts/19   lab216.labs.cs.k 12:13    0.00s  1.05s  1.05s -bash
+jbehler1 pts/22   lab149.labs.cs.k 12:13    1:12   3.89s  2.80s emacs difference.cpp
+jbehler1 pts/23   lab149.labs.cs.k 12:13    1:05m  0.65s  0.54s emacs logview.cpp
+lhenman  pts/24   lab208.labs.cs.k 12:13    8.00s  0.53s  0.53s -bash
+jwils186 pts/25   lab214.labs.cs.k 13:03    1:44   0.26s  0.26s -bash
+zalshaye pts/27   lab156.labs.cs.k 12:15    0.00s  0.30s  0.30s -bash
+mgaire   pts/28   lab158.labs.cs.k 12:15    0.00s  0.36s  0.36s -bash
+lmill153 pts/31   10.14.69.138     12:33   44:00   0.11s  0.11s -bash
+npoched1 pts/32   10.14.70.13      12:38   15:44   0.28s  0.28s -bash

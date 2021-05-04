@@ -1,0 +1,69 @@
+// Dylan Dennison
+// implementaion file
+// project 1 big int
+// cs23001
+
+#include "bigint.hpp"
+
+
+
+bigInt::bigInt(){ //initializes all(default constructor)
+for (int i = 0; i < CAPACITY; ++i) //setting all elements to zero
+	bigIntArray[i] = 0;
+}
+
+bool bigInt::operator==(const bigInt& rhs) { //equals operator, compares two instances of bigInt
+bool equal = true;
+for (int i = 0; i < CAPACITY; ++i) {
+	if(bigIntArray[i] == rhs.bigIntArray[i])
+		equal = true;
+	else
+		return false;
+   }
+   return equal;
+}
+
+bigInt::bigInt(int num){             //puts each number in an element
+for (int i = 0; i < CAPACITY; i++) {
+	bigIntArray[i] = num % 10;
+	num = num / 10;
+}
+}
+
+bigInt::bigInt(const char charArray[]) : bigInt() {  //takes charArray and puts it into bigIntArray
+int arraySize = 0;
+
+while(charArray[arraySize] != '\0'){
+
+++arraySize;
+}
+--arraySize;
+for(int i = 0; arraySize >  -1; ++i, --arraySize){
+ bigIntArray[i] = charArray[arraySize] - '0';
+
+}
+}
+
+bigInt::debugPrint(std::ostream& pInt) const; {  //prints array
+for (int i = 0; i <(CAPACITY - 1); --i){
+	std::cout << "|" << bigIntArray[i] << "|";
+	std::cout << std::endl;
+}
+}
+
+std::ostream& operator<<(std::ostream& out, bigInt rhs) { //outputs array in correct order
+int count = 0;
+bool check = false;
+for(int i = CAPACITY; i >= 0; --i)
+
+if(bigIntArray[i] > 0)
+	check = true;
+if(check == true){
+	std::cout << bigIntArray[i];
+	++count;
+}
+if(count > 79){
+std::cout << std::endl;
+count = 0;
+}
+}

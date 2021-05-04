@@ -1,0 +1,30 @@
+ 12:59:15 up 158 days, 20:21, 28 users,  load average: 0.35, 0.22, 0.17
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+whaverst pts/1    daphne.sdml.cs.k 10:59   49:39   0.26s  0.26s -bash
+whaverst pts/2    daphne.sdml.cs.k 10:59    1:59m  0.22s  0.22s -bash
+jbehler1 pts/4    10.14.82.64      09:21    3:13m  6.82s  6.60s emacs difference.cpp
+jbehler1 pts/5    10.14.82.64      10:04    2:54m  0.76s  0.61s emacs logview.cpp
+jclar145 pts/6    lab215.labs.cs.k 11:52   10:27   0.12s  0.12s -bash
+drock4   pts/7    lab218.labs.cs.k 11:53    3:07   0.37s  0.37s -bash
+vwheatle pts/8    lab207.labs.cs.k 12:08   11.00s  0.94s  0.13s svn ci -m heres a really cool log file
+mjorda23 pts/11   cpe-173-89-88-51 12:01    1:23   1.13s  1.03s vim MatthewJordan-CS43203-Warm-up-Draft.c
+msherlin pts/12   lab220.labs.cs.k 12:51   11.00s  0.15s  0.15s -bash
+mbabcoc5 pts/13   lab160.labs.cs.k 12:45    3.00s  0.20s  0.01s nano diff.cpp
+ddenni19 pts/14   lab221.labs.cs.k 12:02    3.00s  0.26s  0.02s w
+amoor131 pts/15   lab204.labs.cs.k 12:04    2:59   0.73s  0.73s -bash
+tgargas2 pts/16   lab222.labs.cs.k 12:11    6:03   0.13s  0.13s -bash
+aalbaghd pts/17   lab201.labs.cs.k 12:12   19.00s  0.31s  0.31s -bash
+swellin4 pts/18   lab213.labs.cs.k 12:12   19.00s  0.32s  0.32s -bash
+nuphouse pts/19   lab216.labs.cs.k 12:13   27.00s  0.55s  0.55s -bash
+aalemais pts/20   10.14.83.184     12:15    1:47   0.31s  0.31s -bash
+tfreem22 pts/21   lab212.labs.cs.k 12:14    2:11   0.33s  0.33s -bash
+jbehler1 pts/22   lab149.labs.cs.k 12:13   27.00s  2.29s  1.65s emacs difference.cpp
+jbehler1 pts/23   lab149.labs.cs.k 12:13   45:31   0.65s  0.54s emacs logview.cpp
+lhenman  pts/24   lab208.labs.cs.k 12:13    4:03   0.22s  0.22s -bash
+jwils186 pts/25   lab214.labs.cs.k 12:14    3.00s  0.16s  0.16s -bash
+blam1    pts/26   lab153.labs.cs.k 12:22   26:43   0.31s  0.31s -bash
+zalshaye pts/27   lab156.labs.cs.k 12:15   43:44   0.14s  0.14s -bash
+mgaire   pts/28   lab158.labs.cs.k 12:15   11.00s  0.76s  0.55s emacs practice.cpp
+jlebowi1 pts/29   10.14.208.210    12:19    3:15  18.69s  2.79s emacs diff.cpp
+lmill153 pts/31   10.14.69.138     12:33   24:03   0.11s  0.11s -bash
+npoched1 pts/32   10.14.70.13      12:38    3.00s  0.27s  0.27s -bash

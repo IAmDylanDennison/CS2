@@ -1,0 +1,49 @@
+Project 4
+
+Part 1: 100
+	-good job
+
+-----
+
+Project 3
+
+Part 1: 100
+	-good job
+
+Part 2: 100
+	-good job
+
+Part 3: 100
+	-no points deducted but consider how your output file looks when used, it should be the same as the console output
+
+-----
+
+Project 2
+
+Part 1: 95
+	-segfualt in instructor tests for less than
+
+Part 2: 100
+	-good job
+
+Part 3: 90 regrade
+	-split fails oracle tests
+
+Part 4: 100
+	-good job
+
+-----
+
+Project 1
+
+Part 1: 95
+	- << operator does not properly print bigints with value 0
+
+Part 2: 100
+	-good job
+
+Part 3: 100
+	-good job
+	-be careful with tests cases, you had an incorrect assert at the end of your times digit tests
+
+Bonus: 10

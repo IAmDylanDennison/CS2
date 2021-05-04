@@ -1,0 +1,243 @@
+//Dylan Dennison
+//Implementation file
+//CS23001
+//project 2 string
+
+#include "string.hpp"
+
+String::String() {
+	str[0] = '\0';
+}
+
+String::String(char ch) {
+	str[0] = ch;
+	str[1] = '\0';
+}
+
+String::String(const char cChar[]) {
+int i = 0;
+while(cChar[i] != '\0') {
+
+	str[i] = cChar[i];
+	++i;
+}
+str[i] = '\0';
+}
+
+char& String::operator[](int num) {
+assert(num >= 0 && num < STRING_SIZE);
+	return str[num];
+
+}
+
+char String::operator[](int num) const {
+assert(num >= 0 && num < STRING_SIZE);
+	return str[num];
+}
+
+int String::capacity() const {
+return STRING_SIZE - 1;
+} 
+
+int String::length() const {
+int i = 0;
+while(str[i]!= '\0') {
+	++i;
+}
+return i;
+}
+
+String String::substr(int start, int end) const {
+	
+	if(start < 0)
+		start = 0;
+	if(start > length())
+		start = length() -1;
+	if(end < 0)
+		end = 0;
+	if(end > length())
+		end = length() -1;
+	if(start > end) return "";
+
+	String rlt;
+	int i = 0;
+	for(; i <= end - start; i++)
+	{
+		rlt.str[i] = str[i + start];
+	}
+	
+	rlt.str[i] = '\0';
+	return rlt;
+}
+
+int String::findch(int start, char c) {
+	assert(start >= 0 && start < length());
+
+	int end = length()-1;
+
+	
+	for(int i = start; i <= end; i++)
+	{
+		
+		if(str[i] == c)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+int String::findstr(int pos, const String& target) {
+	
+	while(pos <= length() - target.length()) {
+		if (substr(pos, pos + target.length() - 1) == target)
+			return pos;
+		++pos;
+	}	
+	return -1;
+	
+
+}
+
+String operator+(const char lhs[],  const String& rhs) {return String(lhs) + rhs;};
+
+String operator+(char lhs,  const String &rhs) {return String(lhs) + rhs;};
+
+String String::operator+(const String& rhs)  const{
+
+String result(str);
+int start = length();
+int index = 0;
+
+	while(rhs.str[index] != 0)  {
+	if(start + index == STRING_SIZE)
+		break;
+	result.str[start + index] = rhs.str[index];
+		++index;
+}
+result.str[start + index] = 0;
+return result; 
+}
+
+bool operator==(const char lhs[], const String& rhs) {return String(lhs) == rhs;};
+
+bool operator==(char lhs, const String& rhs) {return String(lhs) == rhs;};
+
+bool String::operator==(const String& rhs) const {
+int size1 = length();
+int size2 = rhs.length();
+if (size2 != size1) {
+	return false;
+}
+else {
+	for(int i = 0; i < size2; ++i) {
+		if(str[i] != rhs.str[i]) {
+			return false;
+		}
+	}
+}
+return true;
+
+}
+
+
+bool String::operator<(const String& rhs) const {
+int size1 = length();
+int size2 = rhs.length();
+
+int size = (size1 < size2 ? size1 : size2);
+
+	for(int i = 0; i < size; ++i) {
+		if(str[i] < rhs.str[i])
+			return true;
+		else if(rhs.str[i] < str[i])
+			return false;
+		}
+	if(size2 < size1) {
+		return false;
+}
+
+return true;
+}
+
+bool operator<(const char lhs[],  const String& rhs){
+	if(String(lhs) < rhs)
+		return true;
+	else
+		return false;
+}
+
+bool operator<(char lhs, const String& rhs){
+	if(String(lhs) < rhs)
+		return true;
+	else
+		return false;
+}
+
+bool operator<=(const String& lhs, const String& rhs) {
+	if(((lhs < rhs) || (lhs == rhs)) && !(lhs > rhs))
+		return true;
+	else
+		return false;
+}
+
+bool operator!=(const String& lhs, const String& rhs) {
+	if((lhs < rhs) || (lhs > rhs))
+		return true;
+	else
+		return false;
+}
+
+bool operator>=(const String& lhs, const String& rhs) {
+	if(((lhs > rhs) || (lhs == rhs)) && !(lhs < rhs))
+		return true;
+	else
+		return false;
+}
+
+bool operator>(const String& lhs, const String& rhs) {
+	if((lhs > rhs) && !(lhs == rhs))
+		return true;
+	else
+		return false;
+}
+
+
+
+std::ostream& operator<<(std::ostream& out, const String& rhs) {
+	int index = 0;
+	while(rhs.str[index] != 0) {
+		out << rhs.str[index];
+		++index;
+}	
+return out;
+}
+
+std::istream& operator>>(std::istream& in, String& rhs) {
+char temp[STRING_SIZE];
+	
+	if(!in.eof()) {
+		in >> temp;
+		rhs = String(temp);
+	}
+	else {
+		rhs = String();
+		}
+return in;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

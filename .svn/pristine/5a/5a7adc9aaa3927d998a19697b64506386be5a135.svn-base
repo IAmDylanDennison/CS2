@@ -1,0 +1,25 @@
+// Dylan Dennison
+// Project 1 bigint headerfile
+// CS23001
+
+#ifndef BIGINT_H_
+#define BIGINT_H_
+
+const int CAPACITY = 400;
+
+class bigInt {
+bigInt();
+bigInt(int);
+bigInt(const char[]);
+void debugPrint(std::ostream&);
+
+}
+
+
+
+
+
+
+
+
+#endif BIGINT_H_
